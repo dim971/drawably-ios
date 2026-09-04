@@ -1,0 +1,49 @@
+name: Bug report
+description: Something behaves or draws differently than it should
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. If this is about how something is *drawn*, pin a
+        seed (`DrawablyButton("Done", seed: 42)`) and include it — it turns
+        "it looks wrong sometimes" into something anyone can reproduce.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: The smallest snippet that shows it. Include the seed if it draws.
+      render: swift
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Drawably version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: platform
+    attributes:
+      label: Platform and toolchain
+      placeholder: "iOS 18.2 simulator, Xcode 16.2"
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Screenshots are very welcome for drawing problems.

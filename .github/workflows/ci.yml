@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    name: Package
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: swift --version
+
+      - name: Build
+        run: swift build --build-tests
+
+      # The engine is pinned to the JavaScript original's output; a failure here
+      # means the port has drifted. See docs/fidelity.md.
+      - name: Test
+        run: swift test
+
+      - name: Fail on warnings
+        run: |
+          rm -rf .build
+          swift build --build-tests 2>&1 | tee build.log
+          if grep -q "warning:" build.log; then
+            echo "::error::the build emitted warnings"
+            grep "warning:" build.log
+            exit 1
+          fi
+
+  lint:
+    name: Lint
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install swiftformat swiftlint
+      - run: swiftformat --lint .
+      - run: swiftlint lint --strict
+
+  showcase:
+    name: Showcase app
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen
+      - name: Generate the project
+        working-directory: Showcase
+        run: xcodegen generate
+      - name: Build for the simulator
+        run: |
+          xcodebuild build \
+            -project Showcase/DrawablyShowcase.xcodeproj \
+            -scheme DrawablyShowcase \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO
