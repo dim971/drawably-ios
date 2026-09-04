@@ -6,4 +6,9 @@
 --wrapcollections preserve
 --commas inline
 --self remove
+# One-line bodies are deliberate here: `if pressed { resketch() }` reads better
+# than three lines. Newer SwiftFormat releases enable this rule by default, so
+# it is disabled explicitly rather than left to the version CI happens to get.
+--disable wrapIfStatementBodies
+
 --exclude .build,Showcase/DrawablyShowcase.xcodeproj
