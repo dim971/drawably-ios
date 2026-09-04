@@ -3,7 +3,9 @@ import PackageDescription
 
 let package = Package(
     name: "Drawably",
-    platforms: [.iOS(.v17)],
+    // macOS is declared so `swift test` runs the engine goldens natively;
+    // the components are SwiftUI and work on both.
+    platforms: [.iOS(.v17), .macOS(.v14)],
     products: [
         .library(name: "Drawably", targets: ["Drawably"])
     ],
