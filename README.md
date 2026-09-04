@@ -24,7 +24,7 @@ All fifteen upstream controls, with upstream's defaults.
 
 | Component | What it is |
 | --- | --- |
-| `DrawablyButton` | Three variants (`.outline`, `.solid`, `.scribble`), three tones (`.standard`, `.neutral`, `.danger`), four states (`.idle`, `.loading`, `.error`, `.success`). Re-sketches on press and hover. |
+| `DrawablyButton` | Three variants (`.outline`, `.solid`, `.scribble`), three tones (`.standard`, `.neutral`, `.danger`), four states (`.idle`, `.loading`, `.error`, `.success`). Re-sketches on press and hover, and washes its inside with its own ink — 18% pressed, 10% hovered. |
 | `DrawablyCard` | A sketched box to group content in. |
 | `DrawablyCheckbox` | The tick is drawn on stroke by stroke over 240ms. |
 | `DrawablyRadio` | A ring that gains a dot when picked. |

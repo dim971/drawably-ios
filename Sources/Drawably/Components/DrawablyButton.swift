@@ -173,16 +173,23 @@ public struct DrawablyButtonStyle: ButtonStyle {
                     DrawablyGeometry.buttonScribble(size.width, size.height, o)
                 })
             }
-            // Hover washes the inside with 10% ink, except under a solid fill
-            // where there is nothing to see.
-            let wash = isHovering && style.variant != .solid && isEnabled
-            layers.append(SketchLayer(.outline, fill: wash ? labelColor.opacity(0.1) : nil) { size, o in
+            layers.append(SketchLayer(.outline, fill: wash) { size, o in
                 DrawablyGeometry.buttonOutline(size.width, size.height, o)
             })
             layers.append(SketchLayer(.focus, isVisible: style.isFocused) { size, o in
                 DrawablyGeometry.buttonFocus(size.width, size.height, o)
             })
             return layers
+        }
+
+        private var wash: Color? {
+            drawablyButtonWash(
+                ink: labelColor,
+                variant: style.variant,
+                isEnabled: isEnabled,
+                isPressed: configuration.isPressed,
+                isHovering: isHovering
+            )
         }
 
         var body: some View {
@@ -192,11 +199,7 @@ public struct DrawablyButtonStyle: ButtonStyle {
                 .padding(.horizontal, 14)
                 .background(
                     SketchChrome(
-                        configuration: ButtonSketchConfig(
-                            variant: style.variant,
-                            focused: style.isFocused,
-                            washed: isHovering
-                        ),
+                        configuration: ButtonSketchConfig(variant: style.variant),
                         layers: layers,
                         seed: seed,
                         // loading speeds the boil up from 1200ms to 450ms
@@ -241,8 +244,37 @@ public struct DrawablyButtonStyle: ButtonStyle {
 
 /// What distinguishes one button's layer set from another, so the sketch cache
 /// knows when it has to regenerate rather than reuse.
+///
+/// Only the variant changes which shapes exist. Focus and the press wash change
+/// how they are painted, which is a redraw, not a regeneration — keeping them
+/// out of the key is what stops a button re-sketching itself every time a
+/// finger touches it.
 private struct ButtonSketchConfig: Hashable {
     let variant: DrawablyButtonVariant
-    let focused: Bool
-    let washed: Bool
+}
+
+/// How much ink a button washes its inside with.
+enum DrawablyButtonWash {
+    /// Upstream's hover wash.
+    static let hover: Double = 0.1
+    /// A press gets a stronger one — and gets it on touch devices, where hover
+    /// never happens and the sink-and-thicken alone is easy to miss under a
+    /// fingertip.
+    static let pressed: Double = 0.18
+}
+
+/// The wash painted inside a button's outline, or `nil` for none.
+///
+/// A solid button is already filled, so there would be nothing to see; a
+/// disabled one does not react at all.
+func drawablyButtonWash(
+    ink: Color,
+    variant: DrawablyButtonVariant,
+    isEnabled: Bool,
+    isPressed: Bool,
+    isHovering: Bool
+) -> Color? {
+    guard isEnabled, variant != .solid else { return nil }
+    if isPressed { return ink.opacity(DrawablyButtonWash.pressed) }
+    return isHovering ? ink.opacity(DrawablyButtonWash.hover) : nil
 }
