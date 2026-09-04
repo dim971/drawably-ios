@@ -176,7 +176,28 @@ public enum DrawablyGeometry {
             + Rough.line(apexX, inset, left + popupTailWidth, baseY, second)
     }
 
+    /// How far an outline's stroke can reach inside its box: the inset it is
+    /// drawn at, half its own width, and the jitter of the second, wider pass.
+    ///
+    /// Anything that has to stay clear of the stroke — a label inside a tight
+    /// box, say — has to allow for all three, and both of the last two come
+    /// from the theme.
+    public static func outlineReach(width: Double, roughness: Double) -> Double {
+        inset + width / 2 + 1.5 * roughness * 1.4
+    }
+
     // MARK: - Badge
+
+    /// Upstream sets 1pt above and below, which leaves the label inside the
+    /// stroke's own reach — at the default width it lands on the text, and a
+    /// thicker pen or a rougher hand makes it worse.
+    public static func badgePadding(
+        width: Double,
+        roughness: Double
+    ) -> (vertical: Double, horizontal: Double) {
+        let reach = outlineReach(width: width, roughness: roughness)
+        return (vertical: reach + 2, horizontal: reach + 5)
+    }
 
     public static func badgeOutline(_ w: Double, _ h: Double, _ o: RoughOptions) -> SketchPath {
         outlineRect(2, w, h, o)

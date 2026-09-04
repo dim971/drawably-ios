@@ -33,9 +33,15 @@ public struct DrawablyBadge<Label: View>: View {
         label
             .font(.system(size: 12, weight: .medium, design: .monospaced))
             .foregroundStyle(theme.stroke)
-            .padding(.vertical, 1)
-            .padding(.horizontal, 7)
+            .padding(.vertical, padding.vertical)
+            .padding(.horizontal, padding.horizontal)
             .drawablySketch(variant, layers: layers, seed: seed ?? freshSeed)
+    }
+
+    /// The label has to clear the sketched outline, which moves with the
+    /// theme's stroke width and roughness.
+    private var padding: (vertical: Double, horizontal: Double) {
+        DrawablyGeometry.badgePadding(width: theme.width, roughness: theme.roughness)
     }
 
     private var layers: [SketchLayer] {
