@@ -12,6 +12,11 @@ struct DrawablyShowcaseApp: App {
 
 /// A temporary page for eyeballing components as they land.
 struct ScratchScreen: View {
+    @State private var agreed = true
+    @State private var subscribed = false
+    @State private var boiling = true
+    @State private var tool = "Pen"
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 28) {
@@ -30,6 +35,18 @@ struct ScratchScreen: View {
                 HStack(spacing: 12) {
                     DrawablyButton("Wait", state: .loading) {}
                     DrawablyButton("Off") {}.disabled(true)
+                }
+
+                Text("Choice")
+                    .font(.headline)
+                VStack(alignment: .leading, spacing: 14) {
+                    DrawablyCheckbox("Ship it", isOn: $agreed)
+                    DrawablyCheckbox("Subscribe", isOn: $subscribed)
+                    DrawablyToggle("Boil", isOn: $boiling)
+                    HStack(spacing: 20) {
+                        DrawablyRadio("Pen", selection: $tool, value: "Pen")
+                        DrawablyRadio("Pencil", selection: $tool, value: "Pencil")
+                    }
                 }
 
                 Text("Badges")

@@ -192,7 +192,7 @@ public struct DrawablyButtonStyle: ButtonStyle {
                 .padding(.horizontal, 14)
                 .background(
                     SketchChrome(
-                        configuration: Config(
+                        configuration: ButtonSketchConfig(
                             variant: style.variant,
                             focused: style.isFocused,
                             washed: isHovering
@@ -236,11 +236,13 @@ public struct DrawablyButtonStyle: ButtonStyle {
             guard style.seed == nil, !reduceMotion else { return }
             freshSeed = drawablyRandomSeed()
         }
-
-        private struct Config: Hashable {
-            let variant: DrawablyButtonVariant
-            let focused: Bool
-            let washed: Bool
-        }
     }
+}
+
+/// What distinguishes one button's layer set from another, so the sketch cache
+/// knows when it has to regenerate rather than reuse.
+private struct ButtonSketchConfig: Hashable {
+    let variant: DrawablyButtonVariant
+    let focused: Bool
+    let washed: Bool
 }
