@@ -1,0 +1,21 @@
+excluded:
+  - .build
+  - Tests/DrawablyTests/Fixtures
+
+disabled_rules:
+  - todo
+
+line_length:
+  warning: 110
+  error: 140
+
+identifier_name:
+  # the engine works in terms of x/y/w/h/r/o, matching the upstream source
+  min_length: 1
+  excluded: [x, y, w, h, r, o, n, a, b, t, d, i, co, dx, dy, ux, uy]
+
+type_name:
+  min_length: 2
+
+function_parameter_count:
+  warning: 7

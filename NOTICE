@@ -1,0 +1,16 @@
+Drawably for SwiftUI
+====================
+
+This package is a native SwiftUI port of Drawably, a hand-drawn UI control
+library for the web.
+
+    Drawably — https://www.drawably.dev
+    https://github.com/Danilaa1/drawably
+    Copyright (c) 2026 Daniel Belyi
+    Licensed under the MIT License
+
+The stroke-generation engine (Sources/Drawably/Core) is a direct port of
+Drawably's `src/prng.ts` and `src/rough.ts`, and the component geometry in
+Sources/Drawably/Components follows `src/controls.ts`. Test fixtures under
+Tests/DrawablyTests/Fixtures are generated from the published npm package so
+this port can be verified against upstream output.
