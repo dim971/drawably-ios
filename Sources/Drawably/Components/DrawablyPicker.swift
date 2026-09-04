@@ -54,7 +54,18 @@ public struct DrawablyPicker<Value: Hashable>: View {
                     }
             }
         }
-        .overlay(alignment: .topLeading) {
+        // A scrim behind the list, so a tap anywhere else closes it. Without a
+        // popover there is nothing else catching those taps; it is clipped to
+        // whatever scrolls the picker, which is the visible area anyway.
+        .overlay {
+            if isOpen {
+                Color.clear
+                    .frame(width: 4000, height: 4000)
+                    .contentShape(.rect)
+                    .onTapGesture { isOpen = false }
+            }
+        }
+        .overlay(alignment: .top) {
             if isOpen {
                 DrawablyPickerList(
                     options: options,

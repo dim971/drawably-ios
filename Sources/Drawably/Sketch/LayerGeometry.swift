@@ -147,8 +147,6 @@ public enum DrawablyGeometry {
     /// tail is drawn inside the box rather than hanging outside it.
     public static let popupTailHeight: Double = 10
     public static let popupTailWidth: Double = 18
-    /// How far the tail sits from the popup's leading edge.
-    public static let popupTailInset: Double = 14
 
     /// The popup's frame, which starts below the space the tail occupies.
     public static func popupFrame(_ w: Double, _ h: Double, _ o: RoughOptions) -> SketchPath {
@@ -168,7 +166,8 @@ public enum DrawablyGeometry {
     /// the platform's own bubble.
     public static func popupTail(_ w: Double, _ h: Double, _ o: RoughOptions) -> SketchPath {
         _ = h
-        let left = min(inset + popupTailInset, w - inset - popupTailWidth)
+        // centred, because the popup is centred under the control it belongs to
+        let left = (w - popupTailWidth) / 2
         let apexX = left + popupTailWidth / 2
         let baseY = inset + popupTailHeight
         var second = o
