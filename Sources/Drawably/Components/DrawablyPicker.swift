@@ -1,8 +1,13 @@
 import SwiftUI
 
 /// A select drawn as a sketched box with a pen chevron, opening a sketched
-/// popover rather than the system menu — the option list carries a hand-drawn
-/// frame and tick, the way upstream draws them into a customisable `<select>`.
+/// list rather than the system menu — the options carry a hand-drawn frame,
+/// tail and tick, the way upstream draws them into a customisable `<select>`.
+///
+/// The list is anchored below the field rather than presented as a popover, so
+/// nothing but the sketch is drawn: a system popover would wrap it in a white
+/// bubble with a shadow and its own tail, and would decide for itself whether
+/// to sit above or below — which the drawn tail cannot follow.
 ///
 /// ```swift
 /// DrawablyPicker(selection: $tool, options: ["Pen", "Pencil"]) { $0 }
@@ -17,6 +22,7 @@ public struct DrawablyPicker<Value: Hashable>: View {
     @FocusState private var isFocused: Bool
     @State private var freshSeed = drawablyRandomSeed()
     @State private var isOpen = false
+    @State private var fieldHeight: Double = 0
 
     public init(
         selection: Binding<Value>,
@@ -32,17 +38,37 @@ public struct DrawablyPicker<Value: Hashable>: View {
 
     public var body: some View {
         Button {
-            isOpen = true
+            isOpen.toggle()
         } label: {
             label
         }
         .buttonStyle(PressReportingButtonStyle { _ in })
         .focused($isFocused)
         .accessibilityValue(Text(title(selection)))
-        .popover(isPresented: $isOpen) {
-            DrawablyPickerList(options: options, selection: $selection, title: title, seed: pickerSeed)
-                .presentationCompactAdaptation(.popover)
+        .background {
+            GeometryReader { proxy in
+                Color.clear
+                    .onAppear { fieldHeight = proxy.size.height }
+                    .onChange(of: proxy.size.height, initial: true) { _, height in
+                        fieldHeight = height
+                    }
+            }
         }
+        .overlay(alignment: .topLeading) {
+            if isOpen {
+                DrawablyPickerList(
+                    options: options,
+                    selection: $selection,
+                    title: title,
+                    seed: pickerSeed
+                ) { isOpen = false }
+                    .fixedSize()
+                    .offset(y: fieldHeight + 2)
+                    .transition(.opacity)
+            }
+        }
+        .zIndex(isOpen ? 1 : 0)
+        .animation(.drawablyEase(), value: isOpen)
     }
 
     private var label: some View {
@@ -81,23 +107,23 @@ public struct DrawablyPicker<Value: Hashable>: View {
     }
 }
 
-/// The popover: a sketched frame round the options, and a pen tick beside the
-/// chosen one.
+/// The list itself: a sketched frame round the options with a tail pointing
+/// back at the field, and a pen tick beside the chosen one.
 private struct DrawablyPickerList<Value: Hashable>: View {
     let options: [Value]
     @Binding var selection: Value
     let title: (Value) -> String
     let seed: UInt32
+    let close: () -> Void
 
     @Environment(\.drawablyTheme) private var theme
-    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             ForEach(Array(options.enumerated()), id: \.element) { index, option in
                 Button {
                     selection = option
-                    dismiss()
+                    close()
                 } label: {
                     HStack(spacing: 8) {
                         tick(for: option, index: index)
@@ -112,12 +138,18 @@ private struct DrawablyPickerList<Value: Hashable>: View {
             }
         }
         .padding(6)
+        // room at the top for the tail, which is drawn inside the box so
+        // nothing has to render outside its own bounds
+        .padding(.top, DrawablyGeometry.popupTailHeight)
         .drawablySketch("picker", layers: [
             SketchLayer(.outline) { size, o in
-                DrawablyGeometry.fieldOutline(size.width, size.height, o)
+                DrawablyGeometry.popupFrame(size.width, size.height, o)
+            },
+            SketchLayer(.outline) { size, o in
+                DrawablyGeometry.popupTail(size.width, size.height, o)
             }
         ], seed: seed)
-        .padding(8)
+        // paper goes behind the sketch, so the frame and its tail stay visible
         .background(theme.paper)
     }
 

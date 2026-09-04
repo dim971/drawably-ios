@@ -195,7 +195,7 @@ import SwiftUI
 
     CatalogEntry(
         "Picker",
-        summary: "A select with a pen chevron, opening a sketched popover.",
+        summary: "A pen chevron, opening a sketched list tailed back to the field.",
         demos: [
             Demo(
                 "Picker",

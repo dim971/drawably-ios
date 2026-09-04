@@ -143,6 +143,40 @@ public enum DrawablyGeometry {
         return Rough.checkmark(checkInset, checkInset, side, side, o)
     }
 
+    /// How tall the tail is. The popup reserves this much at its top, so the
+    /// tail is drawn inside the box rather than hanging outside it.
+    public static let popupTailHeight: Double = 10
+    public static let popupTailWidth: Double = 18
+    /// How far the tail sits from the popup's leading edge.
+    public static let popupTailInset: Double = 14
+
+    /// The popup's frame, which starts below the space the tail occupies.
+    public static func popupFrame(_ w: Double, _ h: Double, _ o: RoughOptions) -> SketchPath {
+        Rough.roundedRect(
+            inset,
+            inset + popupTailHeight,
+            w - 2 * inset,
+            h - 2 * inset - popupTailHeight,
+            6,
+            o
+        )
+    }
+
+    /// A pen tail on the popup's top edge, pointing back at the control it
+    /// belongs to. Two strokes meeting at a point, drawn the way an arrow head
+    /// is — without it the popup floats unattached, since it carries none of
+    /// the platform's own bubble.
+    public static func popupTail(_ w: Double, _ h: Double, _ o: RoughOptions) -> SketchPath {
+        _ = h
+        let left = min(inset + popupTailInset, w - inset - popupTailWidth)
+        let apexX = left + popupTailWidth / 2
+        let baseY = inset + popupTailHeight
+        var second = o
+        second.seed = o.seed &+ 1
+        return Rough.line(left, baseY, apexX, inset, o)
+            + Rough.line(apexX, inset, left + popupTailWidth, baseY, second)
+    }
+
     // MARK: - Badge
 
     public static func badgeOutline(_ w: Double, _ h: Double, _ o: RoughOptions) -> SketchPath {

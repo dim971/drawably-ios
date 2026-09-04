@@ -31,7 +31,7 @@ All fifteen upstream controls, with upstream's defaults.
 | `DrawablyToggle` | A pill with an ink blob that slides across it. |
 | `DrawablyTextField` | One line of text in a sketched box. |
 | `DrawablyTextEditor` | Several lines of it. |
-| `DrawablyPicker` | A pen chevron and a sketched popover; the box is pre-sized to the widest option so picking never shifts the layout. |
+| `DrawablyPicker` | A pen chevron opening a sketched list, tailed back to the field — no platform chrome around it. The box is pre-sized to the widest option so picking never shifts the layout. |
 | `DrawablyDivider` | A pen line across the available width. |
 | `DrawablyBadge` | A small sharp-cornered tag. `.outline` or `.scribble`. |
 | `DrawablyList` | Bullets drawn in the gutter. `.dash` or `.check`. |
