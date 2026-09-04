@@ -55,20 +55,7 @@ public struct DrawablyList<Data: RandomAccessCollection, ID: Hashable, Content: 
                     // it lands in the list's leading padding
                     .drawablySketch(
                         marker,
-                        layers: [
-                            SketchLayer(.marker) { size, o in
-                                switch marker {
-                                case .dash:
-                                    DrawablyGeometry.listDash(
-                                        size.width, size.height, o, lineHeight: size.height
-                                    )
-                                case .check:
-                                    DrawablyGeometry.listCheck(
-                                        size.width, size.height, o, lineHeight: size.height
-                                    )
-                                }
-                            }
-                        ],
+                        layers: [markerLayer(marker)],
                         seed: (seed ?? freshSeed) &+ UInt32(truncatingIfNeeded: row.index)
                     )
             }
@@ -86,6 +73,20 @@ public struct DrawablyList<Data: RandomAccessCollection, ID: Hashable, Content: 
 
     private var rows: [Row] {
         data.enumerated().map { Row(id: $0.element[keyPath: id], index: $0.offset, element: $0.element) }
+    }
+}
+
+/// Built outside the generic view on purpose: a sendable closure declared in
+/// there captures `Data`, `ID` and `Content`'s metatypes, and it only ever
+/// needed the marker.
+private func markerLayer(_ marker: DrawablyListMarker) -> SketchLayer {
+    SketchLayer(.marker) { size, options in
+        switch marker {
+        case .dash:
+            DrawablyGeometry.listDash(size.width, size.height, options, lineHeight: size.height)
+        case .check:
+            DrawablyGeometry.listCheck(size.width, size.height, options, lineHeight: size.height)
+        }
     }
 }
 

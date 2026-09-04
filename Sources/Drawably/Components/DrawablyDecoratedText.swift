@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 public extension Text {
     /// Draws a pen line under this text, one per line it wraps onto.
     func drawablyUnderline(seed: UInt32? = nil) -> some View {

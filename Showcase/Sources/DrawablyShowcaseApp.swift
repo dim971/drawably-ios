@@ -3,8 +3,6 @@ import SwiftUI
 
 @main
 struct DrawablyShowcaseApp: App {
-    @State private var settings = ShowcaseSettings()
-
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -13,7 +11,6 @@ struct DrawablyShowcaseApp: App {
                 AboutScreen()
                     .tabItem { Label("About", systemImage: "info.circle") }
             }
-            .environment(\.showcaseSettings, settings)
         }
     }
 }
