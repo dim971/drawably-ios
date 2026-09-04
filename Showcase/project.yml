@@ -15,6 +15,7 @@ targets:
     platform: iOS
     sources:
       - Sources
+      - Assets.xcassets
     dependencies:
       - package: Drawably
         product: Drawably
@@ -32,3 +33,4 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: dev.drawably.showcase
         SWIFT_VERSION: "6.0"
         ENABLE_USER_SCRIPT_SANDBOXING: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
