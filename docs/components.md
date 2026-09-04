@@ -4,6 +4,8 @@ Every control takes an optional `seed:`; see [theming.md](theming.md#seeds).
 
 ## Button
 
+<img src="images/components/button.png" alt="Six buttons: a solid one, a scribbled one, an outline, a neutral, a danger and a success">
+
 ```swift
 DrawablyButton("Done", variant: .solid, tone: .standard, state: .idle) { submit() }
 DrawablyButton(variant: .outline) { submit() } label: { Label("Send", systemImage: "paperplane") }
@@ -28,6 +30,8 @@ Also available as `DrawablyButtonStyle` for any `Button`.
 
 ## Card
 
+<img src="images/components/card.png" alt="A sketched box around a monospaced command and a caption">
+
 ```swift
 DrawablyCard { Text("npm i drawably") }
 ```
@@ -35,6 +39,8 @@ DrawablyCard { Text("npm i drawably") }
 A sketched box with 16pt of padding.
 
 ## Checkbox
+
+<img src="images/components/checkbox.png" alt="Two checkboxes, one ticked and one empty, each with a label">
 
 ```swift
 DrawablyCheckbox("Ship it", isOn: $agreed)
@@ -47,6 +53,8 @@ animates `stroke-dashoffset`, this trims the path. Also available as
 
 ## Radio
 
+<img src="images/components/radio.png" alt="Two radio rings, the first with its dot">
+
 ```swift
 DrawablyRadio("Pen", selection: $tool, value: "Pen")
 ```
@@ -55,6 +63,8 @@ DrawablyRadio("Pen", selection: $tool, value: "Pen")
 is several `DrawablyRadio`s sharing one binding.
 
 ## Toggle
+
+<img src="images/components/toggle.png" alt="Two pill switches, one on and one off">
 
 ```swift
 DrawablyToggle("Boil", isOn: $boiling)
@@ -65,6 +75,9 @@ at either end. Also available as `DrawablyToggleStyle`.
 
 ## Text field and text editor
 
+<img src="images/components/textfield.png" alt="A single line of text in a sketched box">
+<img src="images/components/texteditor.png" alt="Two lines of text in a taller sketched box">
+
 ```swift
 DrawablyTextField("your name", text: $name)
 DrawablyTextEditor(text: $notes, minHeight: 96)
@@ -74,6 +87,9 @@ Real `TextField` and `TextEditor` inside the shared sketched box, with the focus
 ring shown on focus. Neither re-sketches on hover, matching upstream.
 
 ## Picker
+
+<img src="images/components/picker.png" alt="A sketched field showing the chosen option and a pen chevron">
+<img src="images/components/picker-open.png" alt="The same field with its list open below it, a pen tail pointing back at the field and a tick beside the chosen option">
 
 ```swift
 DrawablyPicker(selection: $weight, options: ["Light", "Medium", "Heavy"]) { $0 }
@@ -90,6 +106,8 @@ something. A tap anywhere else closes it.
 
 ## Divider
 
+<img src="images/components/divider.png" alt="A pen line across the width">
+
 ```swift
 DrawablyDivider()
 ```
@@ -97,6 +115,8 @@ DrawablyDivider()
 A pen line across the available width, in a 10pt-tall box.
 
 ## Badge
+
+<img src="images/components/badge.png" alt="Two small tags, one outlined and one hatched">
 
 ```swift
 DrawablyBadge("v0.1.0")
@@ -109,6 +129,8 @@ pen gets.
 
 ## List
 
+<img src="images/components/list.png" alt="Two lists, one with dash markers and one with pen ticks">
+
 ```swift
 DrawablyList(steps, id: \.self, marker: .check) { step in
     Text(step)
@@ -120,6 +142,10 @@ each row seeded by its index. For `Identifiable` data the `id:` argument can be
 left out.
 
 ## Text decorations
+
+<img src="images/components/underline.png" alt="A pen line under a phrase">
+<img src="images/components/highlight.png" alt="A marker swipe behind a phrase">
+<img src="images/components/circle.png" alt="A pen loop around a phrase">
 
 ```swift
 Text("a fresh pen sketch").drawablyUnderline()
@@ -134,6 +160,8 @@ box. Underline and circle re-sketch on hover; highlight does not. They draw at
 
 ## Arrow
 
+<img src="images/components/arrow.png" alt="A sketched arrow from a label to a button">
+
 ```swift
 DrawablyArrowLayer(arrows: [DrawablyArrow(from: "hint", to: "send")]) {
     Text("start here").drawablyAnchor("hint")
@@ -146,6 +174,8 @@ scrolls. The arrow runs centre to centre, pulled back to each box's edge plus a
 little clearance.
 
 ## Tilt
+
+<img src="images/components/tilt.png" alt="Three buttons each leaning a slightly different way">
 
 ```swift
 DrawablyButton("Done", variant: .solid) {}.drawablyTilt()
