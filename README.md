@@ -175,6 +175,7 @@ make showcase      # generate, build and run it in the simulator
 | [Theming](docs/theming.md) | The theme, seeds, and drawing your own shapes |
 | [Fidelity](docs/fidelity.md) | How the port is verified against the original |
 | [Architecture](docs/architecture.md) | How a sketch gets from the engine to the screen |
+| [Coding style](docs/coding-style.md) | The API design guidelines as they apply here, and where we differ |
 
 ## Contributing
 

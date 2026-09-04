@@ -30,7 +30,8 @@ public struct DrawablyList<Data: RandomAccessCollection, ID: Hashable, Content: 
 
     @State private var freshSeed = drawablyRandomSeed()
 
-    public init(
+    public // A list over any collection, identified by a key path.
+    init(
         _ data: Data,
         id: KeyPath<Data.Element, ID>,
         marker: DrawablyListMarker = .dash,
@@ -91,6 +92,7 @@ private func markerLayer(_ marker: DrawablyListMarker) -> SketchLayer {
 }
 
 public extension DrawablyList where Data.Element: Identifiable, ID == Data.Element.ID {
+    /// A list over `Identifiable` data, which needs no key path.
     init(
         _ data: Data,
         marker: DrawablyListMarker = .dash,

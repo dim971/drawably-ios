@@ -37,6 +37,7 @@ public extension Subpath {
     ///
     /// Only the tests need this — rendering builds a `Path` from the same
     /// traversal instead — but it is what makes "faithful port" checkable.
+    /// Every stroke's `d` string, concatenated the way upstream builds them.
     var svgString: String {
         guard let first = points.first else { return "" }
         var d = "M\(jsToFixed2(first.x)) \(jsToFixed2(first.y))"
@@ -55,6 +56,7 @@ public extension Subpath {
 }
 
 public extension SketchPath {
+    /// Every stroke's `d` string, concatenated the way upstream builds them.
     var svgString: String {
         subpaths.map(\.svgString).joined()
     }

@@ -57,6 +57,9 @@ Tools/          gen-goldens.mjs, gen-icon.mjs — Node, run by hand
   drawn should be discussed with a pinned seed.
 - Comments explain why, not what. If a constant looks arbitrary, say where it
   came from.
+- `docs/coding-style.md` is the style contract. Note in particular that `Core`
+  and `LayerGeometry` keep upstream's positional signatures deliberately — do
+  not "fix" them into idiomatic argument labels.
 
 ## Verifying
 

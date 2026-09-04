@@ -40,9 +40,16 @@ plainly why it should not.
 
 ## Conventions
 
+[docs/coding-style.md](docs/coding-style.md) is the full version: the
+[Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)
+as they apply here, plus the handful of places this project deliberately
+differs. The short version:
+
 - Comments explain *why*, not *what*. If a constant looks arbitrary, say where
   it came from.
-- Public API carries doc comments.
+- Every public declaration carries a doc comment. SwiftLint enforces it.
+- The engine keeps upstream's positional signatures on purpose, so it can be
+  read side by side with the JavaScript when a golden fails.
 - Commit messages describe the change and the reasoning, in prose.
 
 ## Reporting a bug

@@ -58,6 +58,7 @@ public enum Rough {
         }
     }
 
+    /// Samples `n` points along an arc of an ellipse.
     public static func ellipsePoints(
         _ cx: Double, _ cy: Double, _ rx: Double, _ ry: Double,
         _ a0: Double, _ a1: Double, _ n: Int

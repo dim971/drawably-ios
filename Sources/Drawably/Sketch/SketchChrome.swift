@@ -18,6 +18,7 @@ public struct SketchLayer {
     /// outline picks up on hover.
     var fill: Color?
 
+    /// Creates a layer from a shape and the role that decides how it is painted.
     public init(
         _ role: SketchRole,
         isVisible: Bool = true,

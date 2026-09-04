@@ -1,12 +1,14 @@
 import Foundation
 
 public extension Rough {
+    /// A straight pen stroke between two points.
     static func line(
         _ x1: Double, _ y1: Double, _ x2: Double, _ y2: Double, _ o: RoughOptions
     ) -> SketchPath {
         doubleStroke(sampleLine(x1, y1, x2, y2), o, false)
     }
 
+    /// A pen circle.
     static func circle(_ cx: Double, _ cy: Double, _ r: Double, _ o: RoughOptions) -> SketchPath {
         ellipse(cx, cy, r, r, o)
     }
@@ -23,15 +25,19 @@ public extension Rough {
         return doubleStroke(Array(points), o, true)
     }
 
+    /// A pen rectangle with rounded corners.
     static func roundedRect(
         _ x: Double, _ y: Double, _ w: Double, _ h: Double, _ r: Double, _ o: RoughOptions
     ) -> SketchPath {
         doubleStroke(roundedRectPoints(x, y, w, h, r), o, true)
     }
 
+    /// How long each of the arrow head's wings is, and how far it opens.
     static let arrowHead: Double = 12
+    /// How far each wing opens from the shaft.
     static let arrowHeadAngle: Double = .pi / 6
 
+    /// A pen arrow: a shaft and two wings meeting at its point.
     static func arrow(
         _ x1: Double, _ y1: Double, _ x2: Double, _ y2: Double, _ o: RoughOptions
     ) -> SketchPath {
@@ -54,6 +60,7 @@ public extension Rough {
         return shaft + SketchPath([head(left), head(right)])
     }
 
+    /// A pen tick, drawn down then up.
     static func checkmark(
         _ x: Double, _ y: Double, _ w: Double, _ h: Double, _ o: RoughOptions
     ) -> SketchPath {

@@ -22,7 +22,8 @@ public struct DrawablyRadio<Value: Hashable, Label: View>: View {
     @FocusState private var isFocused: Bool
     @State private var seedBox: SketchSeed
 
-    public init(
+    public // A radio bound to one value of a selection.
+    init(
         selection: Binding<Value>,
         value: Value,
         seed: UInt32? = nil,
@@ -81,6 +82,7 @@ public struct DrawablyRadio<Value: Hashable, Label: View>: View {
 }
 
 public extension DrawablyRadio where Label == Text {
+    /// A radio with a plain text label.
     init(
         _ title: LocalizedStringKey,
         selection: Binding<Value>,

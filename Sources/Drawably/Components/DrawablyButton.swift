@@ -45,7 +45,8 @@ public struct DrawablyButton<Label: View>: View {
 
     @FocusState private var isFocused: Bool
 
-    public init(
+    public // A button around arbitrary label content.
+    init(
         variant: DrawablyButtonVariant = .outline,
         tone: DrawablyTone = .standard,
         state: DrawablyButtonState = .idle,
@@ -78,6 +79,7 @@ public struct DrawablyButton<Label: View>: View {
 }
 
 public extension DrawablyButton where Label == Text {
+    /// A button with a plain text label.
     init(
         _ title: LocalizedStringKey,
         variant: DrawablyButtonVariant = .outline,

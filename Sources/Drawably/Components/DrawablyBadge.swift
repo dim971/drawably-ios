@@ -19,7 +19,8 @@ public struct DrawablyBadge<Label: View>: View {
     @Environment(\.drawablyTheme) private var theme
     @State private var freshSeed = drawablyRandomSeed()
 
-    public init(
+    public // A badge around arbitrary content.
+    init(
         variant: DrawablyBadgeVariant = .outline,
         seed: UInt32? = nil,
         @ViewBuilder label: () -> Label
@@ -59,6 +60,7 @@ public struct DrawablyBadge<Label: View>: View {
 }
 
 public extension DrawablyBadge where Label == Text {
+    /// A badge with a plain text label.
     init(
         _ title: LocalizedStringKey,
         variant: DrawablyBadgeVariant = .outline,

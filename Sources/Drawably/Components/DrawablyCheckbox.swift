@@ -23,12 +23,14 @@ public struct DrawablyCheckbox<Label: View>: View {
 }
 
 public extension DrawablyCheckbox where Label == EmptyView {
+    /// A checkbox with no label.
     init(isOn: Binding<Bool>, seed: UInt32? = nil) {
         self.init(isOn: isOn, seed: seed) { EmptyView() }
     }
 }
 
 public extension DrawablyCheckbox where Label == Text {
+    /// A checkbox with a text label beside it.
     init(_ title: LocalizedStringKey, isOn: Binding<Bool>, seed: UInt32? = nil) {
         self.init(isOn: isOn, seed: seed) { Text(title) }
     }

@@ -58,6 +58,7 @@ public extension Color {
 }
 
 public extension EnvironmentValues {
+    /// The theme every Drawably control below this view draws with.
     @Entry var drawablyTheme = DrawablyTheme.default
 }
 

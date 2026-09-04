@@ -23,12 +23,14 @@ public struct DrawablyToggle<Label: View>: View {
 }
 
 public extension DrawablyToggle where Label == EmptyView {
+    /// A toggle with no label.
     init(isOn: Binding<Bool>, seed: UInt32? = nil) {
         self.init(isOn: isOn, seed: seed) { EmptyView() }
     }
 }
 
 public extension DrawablyToggle where Label == Text {
+    /// A toggle with a text label beside it.
     init(_ title: LocalizedStringKey, isOn: Binding<Bool>, seed: UInt32? = nil) {
         self.init(isOn: isOn, seed: seed) { Text(title) }
     }

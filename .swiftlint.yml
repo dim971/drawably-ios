@@ -5,6 +5,10 @@ excluded:
 disabled_rules:
   - todo
 
+opt_in_rules:
+  # the API design guidelines ask for a doc comment on every declaration
+  - missing_docs
+
 line_length:
   warning: 110
   error: 140

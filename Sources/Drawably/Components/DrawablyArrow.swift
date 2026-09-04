@@ -29,6 +29,7 @@ public struct DrawablyArrow {
     let to: AnyHashable
     let seed: UInt32?
 
+    /// Points an arrow from one named anchor to another.
     public init(from: some Hashable, to: some Hashable, seed: UInt32? = nil) {
         self.from = AnyHashable(from)
         self.to = AnyHashable(to)
