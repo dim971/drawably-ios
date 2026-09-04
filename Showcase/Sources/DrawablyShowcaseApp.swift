@@ -66,6 +66,28 @@ struct ScratchScreen: View {
                     Text($0)
                 }
 
+                Text("Decorations")
+                    .font(.headline)
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("boils like a doodle").drawablyUnderline()
+                    Text("real inputs").drawablyHighlight()
+                    Text("zero dependencies").drawablyCircle()
+                }
+                .padding(.vertical, 8)
+
+                Text("Arrow")
+                    .font(.headline)
+                DrawablyArrowLayer(arrows: [DrawablyArrow(from: "hint", to: "send")]) {
+                    HStack {
+                        Text("start here")
+                            .drawablyAnchor("hint")
+                        Spacer()
+                        DrawablyButton("Send", variant: .solid) {}
+                            .drawablyAnchor("send")
+                    }
+                    .padding(.vertical, 20)
+                }
+
                 Text("Badges")
                     .font(.headline)
                 HStack(spacing: 12) {
