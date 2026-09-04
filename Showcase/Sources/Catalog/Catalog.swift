@@ -7,7 +7,10 @@ import SwiftUI
 /// previews — adding a component is adding an entry, not writing a screen.
 ///
 /// It builds SwiftUI views, so it is main-actor bound like everything else here.
-@MainActor let catalog: [CatalogEntry] = [
+@MainActor let catalog: [CatalogEntry] = controlEntries + annotationEntries
+
+/// The controls proper.
+@MainActor private let controlEntries: [CatalogEntry] = [
     CatalogEntry(
         "Button",
         summary: "Three variants, three tones, four states. Re-sketches when pressed.",
@@ -272,126 +275,5 @@ import SwiftUI
         DrawablyList(["one", "two"], id: \.self, marker: .check) {
             Text($0).font(.caption)
         }
-    },
-
-    CatalogEntry(
-        "Underline",
-        summary: "A pen line under the words, one per line they wrap onto.",
-        demos: [
-            Demo(
-                "Underline",
-                code: #"Text("boils like a doodle").drawablyUnderline()"#
-            ) {
-                Text("boils like a doodle, and every line it wraps onto gets its own")
-                    .drawablyUnderline()
-            }
-        ]
-    ) {
-        Text("underline").font(.caption).drawablyUnderline()
-    },
-
-    CatalogEntry(
-        "Highlight",
-        summary: "A marker swipe behind them.",
-        demos: [
-            Demo(
-                "Highlight",
-                code: #"Text("real inputs").drawablyHighlight()"#
-            ) {
-                Text("real inputs, so keyboard and screen readers work as usual")
-                    .drawablyHighlight()
-            }
-        ]
-    ) {
-        Text("highlight").font(.caption).drawablyHighlight()
-    },
-
-    CatalogEntry(
-        "Circle",
-        summary: "A loop around them, overshooting the way a hand does.",
-        demos: [
-            Demo(
-                "Circle",
-                code: #"Text("zero dependencies").drawablyCircle()"#
-            ) {
-                Text("zero dependencies")
-                    .drawablyCircle()
-                    .padding(8)
-            }
-        ]
-    ) {
-        Text("circle").font(.caption).drawablyCircle()
-    },
-
-    CatalogEntry(
-        "Arrow",
-        summary: "A sketched arrow between two named anchors.",
-        demos: [
-            Demo(
-                "Arrow",
-                code: """
-                DrawablyArrowLayer(arrows: [DrawablyArrow(from: "hint", to: "send")]) {
-                    Text("start here").drawablyAnchor("hint")
-                    DrawablyButton("Send", variant: .solid) {}.drawablyAnchor("send")
-                }
-                """
-            ) {
-                ArrowSample()
-            }
-        ]
-    ) {
-        ArrowPreview()
     }
 ]
-
-// Previews are read-only, so they get their own tiny non-interactive views.
-
-private struct CheckboxPreview: View {
-    @State private var on = true
-    var body: some View {
-        DrawablyCheckbox(isOn: $on)
-    }
-}
-
-private struct RadioPreview: View {
-    @State private var value = "a"
-    var body: some View {
-        DrawablyRadio(selection: $value, value: "a") { EmptyView() }
-    }
-}
-
-private struct TogglePreview: View {
-    @State private var on = true
-    var body: some View {
-        DrawablyToggle(isOn: $on)
-    }
-}
-
-private struct TextFieldPreview: View {
-    @State private var text = ""
-    var body: some View {
-        DrawablyTextField("text", text: $text)
-            .frame(width: 110)
-    }
-}
-
-private struct PickerPreview: View {
-    @State private var value = "Medium"
-    var body: some View {
-        DrawablyPicker(selection: $value, options: ["Medium"]) { $0 }
-            .font(.caption)
-    }
-}
-
-private struct ArrowPreview: View {
-    var body: some View {
-        DrawablyArrowLayer(arrows: [DrawablyArrow(from: "a", to: "b")]) {
-            HStack {
-                Color.clear.frame(width: 1, height: 20).drawablyAnchor("a")
-                Spacer(minLength: 40)
-                Color.clear.frame(width: 1, height: 20).drawablyAnchor("b")
-            }
-        }
-        .frame(width: 100, height: 24)
-    }
-}

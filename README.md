@@ -37,6 +37,7 @@ All fifteen upstream controls, with upstream's defaults.
 | `DrawablyList` | Bullets drawn in the gutter. `.dash` or `.check`. |
 | `.drawablyUnderline()` / `.drawablyHighlight()` / `.drawablyCircle()` | Marks over any view; on `Text` they land once per line the run wraps onto. |
 | `DrawablyArrowLayer` + `.drawablyAnchor(_:)` | A sketched arrow between two named anchors. |
+| `.drawablyTilt()` | Leans a control a couple of degrees, so a group looks laid out by hand. Seeded, so it is stable — and the same seed leans the same way on Android. |
 
 `DrawablyCheckboxStyle` and `DrawablyToggleStyle` are `ToggleStyle`s and
 `DrawablyButtonStyle` is a `ButtonStyle`, so any existing `Toggle` or `Button`
