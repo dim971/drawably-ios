@@ -16,6 +16,9 @@ struct ScratchScreen: View {
     @State private var subscribed = false
     @State private var boiling = true
     @State private var tool = "Pen"
+    @State private var name = ""
+    @State private var notes = "Boils like a doodle."
+    @State private var weight = "Medium"
 
     var body: some View {
         ScrollView {
@@ -47,6 +50,20 @@ struct ScratchScreen: View {
                         DrawablyRadio("Pen", selection: $tool, value: "Pen")
                         DrawablyRadio("Pencil", selection: $tool, value: "Pencil")
                     }
+                }
+
+                Text("Fields")
+                    .font(.headline)
+                VStack(alignment: .leading, spacing: 14) {
+                    DrawablyTextField("Your name", text: $name)
+                    DrawablyTextEditor(text: $notes, minHeight: 72)
+                    DrawablyPicker(selection: $weight, options: ["Light", "Medium", "Heavy"]) { $0 }
+                }
+
+                Text("List")
+                    .font(.headline)
+                DrawablyList(["Sketch it", "Boil it", "Ship it"], id: \.self, marker: .check) {
+                    Text($0)
                 }
 
                 Text("Badges")
