@@ -21,7 +21,7 @@ public extension Text {
 /// Text with a mark drawn on every line it occupies.
 ///
 /// Upstream reads `getClientRects()` to get one box per wrapped line. The
-/// equivalent here is `TextRenderer`, which arrived in iOS 18 — below that the
+/// equivalent here is `TextRenderer`, which arrived in iOS 18. Below that the
 /// whole run is decorated as a single box, which is the same thing whenever the
 /// text fits on one line.
 struct DrawablyDecoratedText: View {
@@ -89,7 +89,7 @@ struct DrawablyDecoratedText: View {
 /// Draws the text, plus one sketched mark per line.
 ///
 /// The geometry is generated inside the draw pass because the line boxes are
-/// only known here — but the seed is fixed, so the same frame always produces
+/// only known here, but the seed is fixed, so the same frame always produces
 /// the same marks, and there are as many shapes as there are lines.
 @available(iOS 18.0, macOS 15.0, *)
 private struct DrawablyDecorationRenderer: TextRenderer {

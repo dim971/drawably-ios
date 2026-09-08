@@ -27,7 +27,7 @@ things they need to know.
 ### Omit needless words, name by role
 
 `SketchLayer`, not `SketchLayerObject`. `role`, not `roleEnum`. The parameter in
-`variants(_:_:count:)` is `count`, not `numberOfVariants` — the type already
+`variants(_:_:count:)` is `count`, not `numberOfVariants`. The type already
 says it is a number.
 
 ### Boolean properties assert something about the receiver
@@ -43,8 +43,8 @@ writing `getAngle()`, the answer is a property.
 
 ### Prefixing
 
-Everything public is prefixed `Drawably` — `DrawablyButton`, `DrawablyTheme`,
-`DrawablyGeometry` — because this library is designed to sit alongside whatever
+Everything public is prefixed `Drawably` (`DrawablyButton`, `DrawablyTheme`,
+`DrawablyGeometry`) because this library is designed to sit alongside whatever
 design system an app already uses, and `Button` would collide. Modifiers follow:
 `drawablyTilt()`, `drawablyUnderline()`, `drawablyTheme(_:)`.
 
@@ -76,8 +76,8 @@ optional and always last but for the trailing closure.
 
 ## Documentation
 
-Every public declaration carries a doc comment. Not a restatement of the name —
-if the comment would only repeat the signature, the comment is not the problem,
+Every public declaration carries a doc comment. Not a restatement of the name.
+If the comment would only repeat the signature, the comment is not the problem,
 the name is.
 
 Say what the reader cannot infer:
@@ -112,11 +112,11 @@ around something, say what.
 **The engine is a transcription, not an interpretation.** Anything under
 `Sources/Drawably/Core` mirrors upstream's structure and operation order,
 including things that would otherwise be refactored away. The golden fixtures
-enforce this — see [fidelity.md](fidelity.md).
+enforce this. See [fidelity.md](fidelity.md).
 
 **Generate geometry once.** Shapes are built per box size, seed and options and
-cached. Nothing is generated inside a draw pass, and presentation state — trim,
-offset, scale, visibility, fill — is never part of a cache key.
+cached. Nothing is generated inside a draw pass, and presentation state (trim,
+offset, scale, visibility, fill) is never part of a cache key.
 
 **The sketch carries no semantics.** Every control wraps a real SwiftUI control.
 If a change makes the sketch itself interactive, it is the wrong change.

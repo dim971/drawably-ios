@@ -47,13 +47,13 @@ public struct DrawablyTheme: Sendable, Equatable {
 }
 
 public extension Color {
-    /// `#2724d1` — upstream's default ink.
+    /// `#2724d1`, upstream's default ink.
     static let drawablyPenBlue = Color(red: 0x27 / 255, green: 0x24 / 255, blue: 0xD1 / 255)
     /// `#d12724`
     static let drawablyError = Color(red: 0xD1 / 255, green: 0x27 / 255, blue: 0x24 / 255)
     /// `#188a42`
     static let drawablySuccess = Color(red: 0x18 / 255, green: 0x8A / 255, blue: 0x42 / 255)
-    /// `#6e675f` — the warm grey of the `neutral` tone.
+    /// `#6e675f`, the warm grey of the `neutral` tone.
     static let drawablyNeutral = Color(red: 0x6E / 255, green: 0x67 / 255, blue: 0x5F / 255)
 }
 

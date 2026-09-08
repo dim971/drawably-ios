@@ -24,7 +24,7 @@ struct Demo: Identifiable {
 
 /// One component in the catalog.
 ///
-/// Adding a component means adding an entry here — the home list, the detail
+/// Adding a component means adding an entry here: the home list, the detail
 /// screen and the previews all read from this one place.
 struct CatalogEntry: Identifiable {
     let id: String

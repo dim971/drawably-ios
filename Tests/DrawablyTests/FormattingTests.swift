@@ -7,7 +7,7 @@ import Testing
 struct FormattingTests {
     @Test("rounds exact halves away from zero, unlike %.2f")
     func exactHalves() {
-        // %.2f would give 0.12 / 11.38 / 0.62 here — round-half-to-even
+        // %.2f would give 0.12 / 11.38 / 0.62 here (round-half-to-even)
         #expect(jsToFixed2(0.125) == "0.13")
         #expect(jsToFixed2(0.375) == "0.38")
         #expect(jsToFixed2(0.625) == "0.63")

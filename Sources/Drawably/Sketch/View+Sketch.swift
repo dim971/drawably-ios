@@ -2,7 +2,7 @@ import SwiftUI
 
 extension View {
     /// Draws a sketch behind this view. The shared plumbing for controls that
-    /// never re-sketch on their own — cards, dividers, badges, fields.
+    /// never re-sketch on their own: cards, dividers, badges, fields.
     func drawablySketch(
         _ configuration: some Hashable,
         layers: [SketchLayer],

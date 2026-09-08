@@ -23,7 +23,7 @@ DrawablyButton(variant: .outline) { submit() } label: { Label("Send", systemImag
 - A state recolours the ink without touching the theme. `loading` also dims the
   button, disables it, and boils at 450ms instead of 1200ms.
 - Pressing lifts the outline to 1.4× its width, sinks the button, and washes its
-  inside with 18% ink; hovering washes at 10%. A solid button is skipped — it is
+  inside with 18% ink; hovering washes at 10%. A solid button is skipped: it is
   already filled.
 
 Also available as `DrawablyButtonStyle` for any `Button`.
@@ -47,7 +47,7 @@ DrawablyCheckbox("Ship it", isOn: $agreed)
 DrawablyCheckbox(isOn: $agreed)              // the box on its own
 ```
 
-22pt square. The tick is *drawn on* over 240ms rather than faded in — upstream
+22pt square. The tick is *drawn on* over 240ms rather than faded in. Upstream
 animates `stroke-dashoffset`, this trims the path. Also available as
 `DrawablyCheckboxStyle` for any `Toggle`.
 
@@ -156,7 +156,7 @@ Text("zero dependencies").drawablyCircle()
 On `Text` these mark every line the run wraps onto, using `TextRenderer`
 (iOS 18+); below that, and on any other view, the whole thing is marked as one
 box. Underline and circle re-sketch on hover; highlight does not. They draw at
-1.5pt rather than the control default of 2 — body copy is thinner than chrome.
+1.5pt rather than the control default of 2: body copy is thinner than chrome.
 
 ## Arrow
 

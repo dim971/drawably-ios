@@ -6,7 +6,7 @@ public struct SketchLayer {
     let role: SketchRole
     let generate: @Sendable (CGSize, RoughOptions) -> SketchPath
     /// Hidden layers stay in the stack so their geometry is not regenerated
-    /// when they appear — a focus ring should not re-sketch on focus.
+    /// when they appear: a focus ring should not re-sketch on focus.
     var isVisible: Bool = true
     /// How much of the stroke is drawn, for the checkbox's tick.
     var trim: Double = 1
@@ -14,7 +14,7 @@ public struct SketchLayer {
     var offsetX: Double = 0
     /// Scale about the centre, for the radio's dot.
     var scale: Double = 1
-    /// Paints the inside of a normally unfilled layer — the wash a button's
+    /// Paints the inside of a normally unfilled layer: the wash a button's
     /// outline picks up on hover.
     var fill: Color?
 
@@ -38,7 +38,7 @@ public struct SketchLayer {
     }
 }
 
-/// A `Path` that has already been generated — `Shape` conformance only so the
+/// A `Path` that has already been generated; `Shape` conformance only so the
 /// animatable modifiers (`trim`, `offset`, `scaleEffect`) can be used on it.
 private struct PrebuiltShape: Shape {
     let prebuilt: Path
@@ -50,8 +50,8 @@ private struct PrebuiltShape: Shape {
 
 /// The sketch drawn behind a control.
 ///
-/// Generates the boil frames once per box size, seed and options — never inside
-/// a draw pass — then cycles which one is shown. Upstream does the same thing
+/// Generates the boil frames once per box size, seed and options (never inside
+/// a draw pass), then cycles which one is shown. Upstream does the same thing
 /// with three stacked SVG paths and a stepped CSS custom property; there is no
 /// equivalent here, so a timeline drives the index instead.
 struct SketchChrome: View {

@@ -61,7 +61,7 @@ See [theming.md](theming.md) for every property and what it does.
 ## Pinning a sketch
 
 Every control takes an optional `seed`. Without one it picks a fresh sketch each
-time it appears, which is the point — but previews and snapshot tests want the
+time it appears, which is the point, but previews and snapshot tests want the
 same drawing every run:
 
 ```swift
@@ -104,6 +104,6 @@ DrawablyCard { … }
 
 ## Where to go next
 
-- [components.md](components.md) — the full reference
-- [theming.md](theming.md) — the theme, seeds, and drawing your own shapes
-- [architecture.md](architecture.md) — how a sketch reaches the screen
+- [components.md](components.md): the full reference
+- [theming.md](theming.md): the theme, seeds, and drawing your own shapes
+- [architecture.md](architecture.md): how a sketch reaches the screen

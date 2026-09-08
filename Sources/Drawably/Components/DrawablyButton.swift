@@ -20,8 +20,8 @@ public enum DrawablyTone: Sendable, Hashable {
     case danger
 }
 
-/// What a button is currently doing, which recolours its ink and — for
-/// `loading` — makes the sketch boil faster.
+/// What a button is currently doing, which recolours its ink and,
+/// for `loading`, makes the sketch boil faster.
 public enum DrawablyButtonState: Sendable, Hashable {
     case idle
     case loading
@@ -235,7 +235,7 @@ public struct DrawablyButtonStyle: ButtonStyle {
             return isHovering && isEnabled && style.state != .loading ? -1 : 0
         }
 
-        /// A press or a hover draws the button again from scratch — a new seed,
+        /// A press or a hover draws the button again from scratch: a new seed,
         /// not just new boil frames. Reduced motion opts out entirely.
         private func resketch() {
             guard style.seed == nil, !reduceMotion else { return }
@@ -248,7 +248,7 @@ public struct DrawablyButtonStyle: ButtonStyle {
 /// knows when it has to regenerate rather than reuse.
 ///
 /// Only the variant changes which shapes exist. Focus and the press wash change
-/// how they are painted, which is a redraw, not a regeneration — keeping them
+/// how they are painted, which is a redraw, not a regeneration. Keeping them
 /// out of the key is what stops a button re-sketching itself every time a
 /// finger touches it.
 private struct ButtonSketchConfig: Hashable {
@@ -259,7 +259,7 @@ private struct ButtonSketchConfig: Hashable {
 enum DrawablyButtonWash {
     /// Upstream's hover wash.
     static let hover: Double = 0.1
-    /// A press gets a stronger one — and gets it on touch devices, where hover
+    /// A press gets a stronger one, and gets it on touch devices, where hover
     /// never happens and the sink-and-thicken alone is easy to miss under a
     /// fingertip.
     static let pressed: Double = 0.18

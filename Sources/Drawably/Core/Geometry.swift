@@ -92,7 +92,7 @@ public enum Rough {
     // MARK: - Jitter
 
     /// Nudges every point by up to `amp` in each axis. The x draw always
-    /// precedes the y draw — reordering them would desynchronise the whole
+    /// precedes the y draw; reordering them would desynchronise the whole
     /// PRNG stream and change every sketch downstream.
     public static func jitter(_ points: [Pt], _ rand: inout Mulberry32, _ amp: Double) -> [Pt] {
         points.map { p in
@@ -109,7 +109,7 @@ public enum Rough {
     }
 
     /// Draws the shape twice from one PRNG stream, the second pass 1.4× wider
-    /// than the first — the overlap is what reads as a pen going over a line.
+    /// than the first; the overlap is what reads as a pen going over a line.
     static func doubleStroke(_ points: [Pt], _ o: RoughOptions, _ close: Bool) -> SketchPath {
         var rand = Mulberry32(seed: o.seed)
         let amp = 1.5 * o.roughness

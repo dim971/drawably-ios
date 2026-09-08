@@ -4,7 +4,7 @@ import SwiftUI
 /// Every component in the library, in the order the docs introduce them.
 ///
 /// One entry per component drives the home list, the detail screen and the
-/// previews — adding a component is adding an entry, not writing a screen.
+/// previews. Adding a component is adding an entry, not writing a screen.
 ///
 /// It builds SwiftUI views, so it is main-actor bound like everything else here.
 @MainActor let catalog: [CatalogEntry] = controlEntries + annotationEntries

@@ -98,7 +98,7 @@ struct LoadingButtonSample: View {
                     state = .idle
                 }
             }
-            Text("Tap it — a loading button boils at 450ms instead of 1200ms.")
+            Text("Tap it: a loading button boils at 450ms instead of 1200ms.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }

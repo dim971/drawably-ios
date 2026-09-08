@@ -16,7 +16,7 @@ final class ShowcaseSettings {
 
     var theme = DrawablyTheme.default
     /// Changing this re-identifies the content, so every control picks a fresh
-    /// seed — the closest thing to upstream's `resketch()` across a whole page.
+    /// seed: the closest thing to upstream's `resketch()` across a whole page.
     private(set) var resketchToken = UUID()
 
     func resketch() {

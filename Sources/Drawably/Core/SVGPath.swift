@@ -5,7 +5,7 @@ import Foundation
 /// C's `%.2f` rounds halves to even, JavaScript rounds them away from zero, so
 /// a value like `0.125` formats as `0.12` in one and `0.13` in the other. Those
 /// exact halves are common in this library's geometry, and the golden fixtures
-/// are upstream's strings — hence the explicit tie branch.
+/// are upstream's strings, hence the explicit tie branch.
 func jsToFixed2(_ value: Double) -> String {
     if value.isNaN { return "NaN" }
     let negative = value < 0
@@ -35,8 +35,8 @@ public extension Subpath {
     /// quadratic through each interior point to the midpoint of the next
     /// segment, then a line to the last point.
     ///
-    /// Only the tests need this — rendering builds a `Path` from the same
-    /// traversal instead — but it is what makes "faithful port" checkable.
+    /// Only the tests need this (rendering builds a `Path` from the same
+    /// traversal instead), but it is what makes "faithful port" checkable.
     /// Every stroke's `d` string, concatenated the way upstream builds them.
     var svgString: String {
         guard let first = points.first else { return "" }

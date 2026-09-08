@@ -16,7 +16,7 @@ struct PressReportingButtonStyle: ButtonStyle {
 
 /// Owns the seed for a control that re-sketches when touched.
 ///
-/// A pinned seed disables the behaviour, and so does reduced motion — matching
+/// A pinned seed disables the behaviour, and so does reduced motion, matching
 /// upstream, which does not even attach its pointer listeners in that case.
 @Observable
 final class SketchSeed {

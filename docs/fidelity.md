@@ -24,7 +24,7 @@ swift test
 ```
 
 A failure means the port has drifted. It never means a tolerance needs
-widening — there is no tolerance.
+widening. There is no tolerance.
 
 ## Regenerating
 
@@ -42,7 +42,7 @@ One reconciliation was needed, in `Core/SVGPath.swift`.
 
 **`Number.prototype.toFixed(2)` is not `%.2f`.** JavaScript rounds exact halves
 away from zero; C rounds them to even. `0.125` is `0.13` upstream and would be
-`0.12` here. Values like that are common in this geometry — any coordinate that
+`0.12` here. Values like that are common in this geometry: any coordinate that
 is a multiple of an eighth lands on one. `jsToFixed2` reproduces the JavaScript
 rule, with an explicit branch for the tie.
 
@@ -51,7 +51,7 @@ rule, with an explicit branch for the tie.
 The engine calls `cos`, `sin`, `atan2` and `hypot` from the platform's libm, and
 sample counts come from `ceil(length / step)`. A last-ulp difference is
 invisible in a rounded coordinate but can move a shape across a sampling
-boundary — an arrow head is exactly 12 long and sampled every 4, so one extra
+boundary: an arrow head is exactly 12 long and sampled every 4, so one extra
 point would shift every later PRNG draw and change the rest of the shape.
 
 Darwin agrees with V8 on every case in the fixtures. The Kotlin port had to

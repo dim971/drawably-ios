@@ -1,13 +1,13 @@
 import SwiftUI
 
 /// A select drawn as a sketched box with a pen chevron, opening a sketched
-/// list rather than the system menu — the options carry a hand-drawn frame,
+/// list rather than the system menu: the options carry a hand-drawn frame,
 /// tail and tick, the way upstream draws them into a customisable `<select>`.
 ///
 /// The list is anchored below the field rather than presented as a popover, so
 /// nothing but the sketch is drawn: a system popover would wrap it in a white
 /// bubble with a shadow and its own tail, and would decide for itself whether
-/// to sit above or below — which the drawn tail cannot follow.
+/// to sit above or below, which the drawn tail cannot follow.
 ///
 /// ```swift
 /// DrawablyPicker(selection: $tool, options: ["Pen", "Pencil"]) { $0 }
@@ -85,7 +85,7 @@ public struct DrawablyPicker<Value: Hashable>: View {
     private var label: some View {
         HStack(spacing: 0) {
             // Every option is laid out invisibly so the box is already as wide
-            // as the widest one — picking never shifts the layout around it.
+            // as the widest one, so picking never shifts the layout around it.
             ZStack(alignment: .leading) {
                 ForEach(options, id: \.self) { option in
                     Text(title(option)).opacity(0)

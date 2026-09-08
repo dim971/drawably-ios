@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         Thanks for the report. If this is about how something is *drawn*, pin a
-        seed (`DrawablyButton("Done", seed: 42)`) and include it — it turns
+        seed (`DrawablyButton("Done", seed: 42)`) and include it: it turns
         "it looks wrong sometimes" into something anyone can reproduce.
 
   - type: textarea

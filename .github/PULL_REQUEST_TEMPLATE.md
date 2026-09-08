@@ -7,7 +7,7 @@
 - [ ] `make lint` and `make test` pass
 - [ ] No new warnings, on the release Xcode and the current beta
 - [ ] The golden fixtures still pass (see `docs/fidelity.md`)
-- [ ] If this changes shared behaviour, the [Android twin](https://github.com/dim971/drawably-android) needs the same change — or the description says why not
+- [ ] If this changes shared behaviour, the [Android twin](https://github.com/dim971/drawably-android) needs the same change, or the description says why not
 
 ## Drawing changes
 

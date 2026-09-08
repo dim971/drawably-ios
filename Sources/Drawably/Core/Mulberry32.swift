@@ -4,7 +4,7 @@ import Foundation
 ///
 /// A direct port of upstream `src/prng.ts`. JavaScript's `Math.imul`, `>>>`
 /// and `|` all operate on 32-bit patterns, so the `UInt32` arithmetic here
-/// produces bit-identical results — which is what lets the golden fixtures
+/// produces bit-identical results, which is what lets the golden fixtures
 /// generated from the npm package pin this port down exactly.
 public struct Mulberry32: Sendable {
     private var state: UInt32

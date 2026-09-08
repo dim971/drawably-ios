@@ -62,7 +62,7 @@ A control without a `seed` picks a fresh one when it appears, and rolls another
 whenever it is pressed or hovered. That is the library's whole idea: the sketch
 is redrawn, not reused.
 
-Pass a `seed` to pin it — the same seed always produces the same drawing, on
+Pass a `seed` to pin it: the same seed always produces the same drawing, on
 this platform and on Android:
 
 ```swift
@@ -76,7 +76,7 @@ snapshot tests and screenshots want.
 
 Setting `boil` to `0` renders one still frame instead of three, and skips the
 ticker entirely. `accessibilityReduceMotion` does the same, and additionally
-stops the press and hover re-sketch — matching what upstream does under
+stops the press and hover re-sketch, matching what upstream does under
 `prefers-reduced-motion`.
 
 ## Drawing your own shapes
@@ -93,8 +93,8 @@ Available: `Rough.line`, `roundedRect`, `circle`, `ellipse`, `arrow`,
 frames of any of them. `SketchPath.path()` turns the result into a SwiftUI
 `Path`.
 
-`DrawablyGeometry` holds the per-control geometry — `buttonOutline`,
-`checkboxCheck`, `toggleKnob` and the rest — if you want a shape that matches an
+`DrawablyGeometry` holds the per-control geometry (`buttonOutline`,
+`checkboxCheck`, `toggleKnob` and the rest) if you want a shape that matches an
 existing control exactly. `DrawablyGeometry.outlineReach(width:roughness:)`
 tells you how far inside its box a sketched outline can reach, which is what to
 allow if you are putting your own content inside one.
