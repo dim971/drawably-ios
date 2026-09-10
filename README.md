@@ -53,7 +53,7 @@ Swift Package Manager:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/dim971/drawably-ios", from: "0.1.0"),
+    .package(url: "https://github.com/dim971/drawably-ios", from: "0.2.0"),
 ]
 ```
 
