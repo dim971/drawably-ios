@@ -229,6 +229,47 @@ import SwiftUI
     },
 
     CatalogEntry(
+        "Progress",
+        summary: "A row of pen boxes, hatched one by one. Not an upstream control.",
+        demos: [
+            Demo(
+                "Steps",
+                note: "Each box runs off its own seed, so a track looks drawn "
+                    + "rather than printed.",
+                code: "DrawablyProgress(step: 3, of: 7)"
+            ) {
+                DrawablyProgress(step: 3, of: 7)
+            },
+            Demo(
+                "The ends",
+                code: """
+                DrawablyProgress(step: 0, of: 5)
+                DrawablyProgress(step: 5, of: 5)
+                """
+            ) {
+                VStack(alignment: .leading, spacing: 12) {
+                    DrawablyProgress(step: 0, of: 5)
+                    DrawablyProgress(step: 5, of: 5)
+                }
+            },
+            Demo(
+                "On a ProgressView",
+                note: "The style dresses any counted ProgressView, so the "
+                    + "platform still reads it out as progress.",
+                code: """
+                ProgressView(value: 0.42)
+                    .progressViewStyle(DrawablyProgressViewStyle(steps: 10))
+                """
+            ) {
+                ProgressView(value: 0.42)
+                    .progressViewStyle(DrawablyProgressViewStyle(steps: 10))
+            }
+        ]
+    ) {
+        DrawablyProgress(step: 3, of: 7)
+    },
+
+    CatalogEntry(
         "Badge",
         summary: "A small sharp-cornered tag round a monospaced label.",
         demos: [

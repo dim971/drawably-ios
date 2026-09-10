@@ -6,6 +6,16 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- `DrawablyProgress` and `DrawablyProgressViewStyle`: a row of pen boxes,
+  hatched one by one as steps complete. This is the first control here with no
+  upstream counterpart, so it carries no golden fixture; the rest of the
+  library remains a byte-identical transcription. It is built from the public
+  engine and the existing layer conventions, and it wraps a real
+  `ProgressView`, so progress semantics reach the platform unchanged.
+
+
 ## [0.1.0]
 
 First release. A SwiftUI port of [Drawably](https://www.drawably.dev) 0.3.10.

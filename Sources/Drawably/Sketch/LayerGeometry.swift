@@ -292,6 +292,26 @@ public enum DrawablyGeometry {
         )
     }
 
+    // MARK: - Progress
+
+    /// How wide one step of a progress track is.
+    public static let progressSegmentWidth: Double = 34
+    /// How tall one step is.
+    public static let progressSegmentHeight: Double = 18
+    /// The gap between two steps.
+    public static let progressSegmentGap: Double = 6
+
+    /// One step's box, rounded a little less than a button's so a short box
+    /// still reads as a box rather than as a pill.
+    public static func progressSegment(_ w: Double, _ h: Double, _ o: RoughOptions) -> SketchPath {
+        outlineRect(4, w, h, o)
+    }
+
+    /// The hatching that marks a step as done, inside its border.
+    public static func progressScribble(_ w: Double, _ h: Double, _ o: RoughOptions) -> SketchPath {
+        Rough.scribbleFill(inset + 1, inset + 1, w - 2 * inset - 2, h - 2 * inset - 2, o)
+    }
+
     // MARK: - Arrow
 
     /// Breathing room between an anchor's edge and the arrow's end.

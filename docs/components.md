@@ -114,6 +114,45 @@ DrawablyDivider()
 
 A pen line across the available width, in a 10pt-tall box.
 
+## Progress
+
+**This control has no upstream counterpart.** Drawably has no progress
+indicator; this one is added by the port, drawn with the same engine and the
+same conventions as the rest. Its geometry is therefore not pinned by a golden
+fixture, because there is nothing upstream to pin it against.
+
+```swift
+DrawablyProgress(step: 3, of: 7)
+```
+
+A row of boxes, `total` of them, with the first `step` hatched. Both arguments
+are clamped: a step past the end fills the track, a negative one empties it, and
+a total below one still draws one box.
+
+Each box is drawn from its own seed, offset from the track's. Sharing one seed
+would draw the same rectangle seven times over, which reads as a printed rule
+rather than as a hand.
+
+`DrawablyProgressViewStyle` puts the same drawing on any SwiftUI `ProgressView`:
+
+```swift
+ProgressView(value: 0.42)
+    .progressViewStyle(DrawablyProgressViewStyle(steps: 10))
+```
+
+| Parameter | Values | Default |
+| --- | --- | --- |
+| `steps` | how many boxes the track has | `10` |
+| `seed` | pins the track, and every box in it | `nil` |
+
+An indeterminate `ProgressView`, one built without a value, draws an empty
+track. So does a fraction that is not a finite number. Neither says anything
+about how far along the work is, and the control does not guess.
+
+The control wraps a real `ProgressView`, so the platform's own progress
+semantics survive the sketch. The value announced is the percentage, formatted
+in the reader's locale.
+
 ## Badge
 
 <img src="images/components/badge.png" alt="Two small tags, one outlined and one hatched">

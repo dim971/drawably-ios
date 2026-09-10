@@ -89,7 +89,7 @@ struct ContentView: View {
 
 ## Components
 
-All fifteen upstream controls, with upstream's defaults.
+All fifteen upstream controls, with upstream's defaults, plus one addition this port makes on its own, marked as such.
 
 | Component | What it is |
 | --- | --- |
@@ -102,6 +102,7 @@ All fifteen upstream controls, with upstream's defaults.
 | `DrawablyTextEditor` | Several lines of it. |
 | `DrawablyPicker` | A pen chevron opening a sketched list, tailed back to the field, with no platform chrome around it. Pre-sized to the widest option so picking never shifts the layout. |
 | `DrawablyDivider` | A pen line across the available width. |
+| `DrawablyProgress` | A row of pen boxes, hatched one by one as steps complete. `DrawablyProgressViewStyle` dresses any counted `ProgressView`. **Not an upstream control.** |
 | `DrawablyBadge` | A small sharp-cornered tag. `.outline` or `.scribble`. |
 | `DrawablyList` | Bullets drawn in the gutter. `.dash` or `.check`. |
 | `.drawablyUnderline()` / `.drawablyHighlight()` / `.drawablyCircle()` | Marks over any view; on `Text` they land once per line the run wraps onto. |
