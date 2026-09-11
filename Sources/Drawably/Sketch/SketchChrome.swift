@@ -143,7 +143,7 @@ struct SketchChrome: View {
                     }
                     .scaleEffect(layer.scale)
                     .offset(x: layer.offsetX)
-                    .opacity(layer.isVisible ? layer.role.opacity : 0)
+                    .opacity(layer.isVisible ? layer.role.opacity(scribble: theme.scribbleOpacity) : 0)
                     .blendMode(layer.role.blendMode)
                 }
             }

@@ -22,6 +22,13 @@ public struct DrawablyTheme: Sendable, Equatable {
     public var roughness: Double
     /// Per-frame flicker amplitude. `0` renders a still sketch.
     public var boil: Double
+    /// How strongly a scribbled fill is drawn, from `0` to `1`.
+    ///
+    /// Upstream hatches at full ink, which reads well on a wide tag and badly
+    /// on a small one: the lines cross the label in the same colour as the
+    /// label, and the word stops being a word. Lowering this keeps the
+    /// scribble and gives the text back. `1` is upstream's own look.
+    public var scribbleOpacity: Double
     /// The smallest a control is drawn, in points, so a finger can hit it.
     ///
     /// Upstream is a web library with a mouse behind it: six pixels of vertical
@@ -42,6 +49,7 @@ public struct DrawablyTheme: Sendable, Equatable {
         success: Color = .drawablySuccess,
         roughness: Double = 1,
         boil: Double = 0.3,
+        scribbleOpacity: Double = 1,
         minimumControlHeight: Double = 44
     ) {
         self.stroke = stroke
@@ -52,6 +60,7 @@ public struct DrawablyTheme: Sendable, Equatable {
         self.success = success
         self.roughness = roughness
         self.boil = boil
+        self.scribbleOpacity = scribbleOpacity
         self.minimumControlHeight = minimumControlHeight
     }
 

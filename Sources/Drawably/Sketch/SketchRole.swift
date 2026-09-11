@@ -52,8 +52,17 @@ public enum SketchRole: Sendable, Hashable {
         }
     }
 
-    var opacity: Double {
-        self == .wash ? 0.3 : 1
+    /// How strongly this layer is drawn, given the theme it is drawn with.
+    ///
+    /// Only two roles are ever less than solid: a wash, which is a wash by
+    /// definition, and a scribble, whose strength the theme owns so a small
+    /// control can keep its hatching without losing its label.
+    func opacity(scribble: Double) -> Double {
+        switch self {
+        case .wash: 0.3
+        case .scribble: scribble
+        default: 1
+        }
     }
 
     var blendMode: BlendMode {

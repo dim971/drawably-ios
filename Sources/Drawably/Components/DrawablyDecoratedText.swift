@@ -80,7 +80,8 @@ struct DrawablyDecoratedText: View {
                 frameCount: frameCount,
                 color: decoration.role.usesFillColor ? theme.fill : theme.stroke,
                 roughness: theme.roughness,
-                boil: theme.boil
+                boil: theme.boil,
+                scribbleOpacity: theme.scribbleOpacity
             )
         )
     }
@@ -100,6 +101,9 @@ private struct DrawablyDecorationRenderer: TextRenderer {
     let color: Color
     let roughness: Double
     let boil: Double
+    /// Carried as a value rather than read from the environment: a
+    /// `TextRenderer` draws outside the view tree and has no environment.
+    let scribbleOpacity: Double
 
     func draw(layout: Text.Layout, in context: inout GraphicsContext) {
         // a highlight goes behind the words; a line or a loop goes over them
@@ -125,7 +129,7 @@ private struct DrawablyDecorationRenderer: TextRenderer {
             )
             var line = context
             line.translateBy(x: rect.minX, y: rect.minY)
-            line.opacity = decoration.role.opacity
+            line.opacity = decoration.role.opacity(scribble: scribbleOpacity)
             if decoration.role.blendMode == .multiply { line.blendMode = .multiply }
             line.stroke(
                 variants[frame % variants.count].path(),
