@@ -6,6 +6,19 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-11
+
+### Changed
+
+- A button is drawn at least 44 points tall. Upstream is a web library, and its
+  six pixels of vertical padding give a box about 29 points high: comfortable
+  with a mouse, too flat for a finger, and under both Apple's 44 and Material's
+  48. The drawn box grows rather than the hit area alone, because a control that
+  is hard to see is hard to aim at. The new theme property
+  `minimumControlHeight` carries it, and `0` restores the original proportions.
+  This changes how every button looks, which is why it is a minor version rather
+  than a patch.
+
 ## [0.2.2] - 2026-09-11
 
 ### Fixed

@@ -22,6 +22,16 @@ public struct DrawablyTheme: Sendable, Equatable {
     public var roughness: Double
     /// Per-frame flicker amplitude. `0` renders a still sketch.
     public var boil: Double
+    /// The smallest a control is drawn, in points, so a finger can hit it.
+    ///
+    /// Upstream is a web library with a mouse behind it: six pixels of vertical
+    /// padding gives a button about 29 points tall, which is comfortable to
+    /// click and too flat to tap. Apple asks for 44 and Material for 48, so the
+    /// box grows to meet it rather than only its hit area: a control that is
+    /// hard to see is hard to aim at.
+    ///
+    /// Set it to `0` for the web library's own proportions.
+    public var minimumControlHeight: Double
 
     public init(
         stroke: Color = .drawablyPenBlue,
@@ -31,7 +41,8 @@ public struct DrawablyTheme: Sendable, Equatable {
         error: Color = .drawablyError,
         success: Color = .drawablySuccess,
         roughness: Double = 1,
-        boil: Double = 0.3
+        boil: Double = 0.3,
+        minimumControlHeight: Double = 44
     ) {
         self.stroke = stroke
         self.fill = fill
@@ -41,6 +52,7 @@ public struct DrawablyTheme: Sendable, Equatable {
         self.success = success
         self.roughness = roughness
         self.boil = boil
+        self.minimumControlHeight = minimumControlHeight
     }
 
     public static let `default` = DrawablyTheme()

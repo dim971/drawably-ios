@@ -199,6 +199,9 @@ public struct DrawablyButtonStyle: ButtonStyle {
                 .foregroundStyle(labelColor)
                 .padding(.vertical, 6)
                 .padding(.horizontal, 14)
+                // The drawn box grows to the theme's minimum, not just the hit
+                // area behind it. See DrawablyTheme.minimumControlHeight.
+                .frame(minHeight: theme.minimumControlHeight)
                 .background(
                     SketchChrome(
                         configuration: ButtonSketchConfig(variant: style.variant),

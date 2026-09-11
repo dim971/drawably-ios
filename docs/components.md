@@ -26,6 +26,11 @@ DrawablyButton(variant: .outline) { submit() } label: { Label("Send", systemImag
   inside with 18% ink; hovering washes at 10%. A solid button is skipped: it is
   already filled.
 
+- A button is drawn at least `minimumControlHeight` tall, 44 points by default,
+  because upstream's six pixels of vertical padding give a box a mouse can click
+  and a finger cannot. Set the theme's `minimumControlHeight` to `0` for the web
+  library's own proportions.
+
 Also available as `DrawablyButtonStyle` for any `Button`.
 
 ## Card
