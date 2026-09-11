@@ -6,6 +6,18 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-09-11
+
+### Fixed
+
+- A control that swaps one variant for another no longer crashes. Paths are
+  generated after an update rather than during it, so a layer set that grew in
+  this pass was drawn against the previous pass's paths and indexed past their
+  end. A badge going from outline to scribble under a finger was enough. The
+  layer count is part of the cache key now, so the paths are regenerated when it
+  changes, and a layer that has none yet waits for the next pass instead of
+  trapping.
+
 ## [0.2.1] - 2026-09-11
 
 ### Fixed

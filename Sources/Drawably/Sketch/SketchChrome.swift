@@ -81,6 +81,13 @@ struct SketchChrome: View {
         var roughness: Double
         var boil: Double
         var configuration: AnyHashable
+        /// How many layers were drawn for these paths.
+        ///
+        /// A control that swaps one variant for another can change how many
+        /// layers it has without changing its size, its seed or anything else
+        /// here. Without this the cached paths would be kept, and the new
+        /// layers would have none.
+        var layerCount: Int
     }
 
     var body: some View {
@@ -91,7 +98,8 @@ struct SketchChrome: View {
                 seed: seed,
                 roughness: theme.roughness,
                 boil: theme.boil,
-                configuration: configuration
+                configuration: configuration,
+                layerCount: layers.count
             )
             content
                 .onChange(of: key, initial: true) { _, _ in
@@ -116,22 +124,28 @@ struct SketchChrome: View {
     private func stack(frame: Int) -> some View {
         ZStack(alignment: .topLeading) {
             ForEach(Array(layers.enumerated()), id: \.offset) { index, layer in
-                let variants = frames[index]
-                let shape = PrebuiltShape(prebuilt: variants[frame % variants.count])
-                ZStack {
-                    if layer.role.isFilled {
-                        shape.fill(paint(for: layer.role))
-                    } else if let fill = layer.fill {
-                        shape.fill(fill)
+                // Paths are regenerated after an update, not during it. A
+                // layer set that grew this pass is asked to draw against the
+                // previous pass's paths, and indexing them would be a crash
+                // rather than a missing line. The next pass has them.
+                if index < frames.count {
+                    let variants = frames[index]
+                    let shape = PrebuiltShape(prebuilt: variants[frame % variants.count])
+                    ZStack {
+                        if layer.role.isFilled {
+                            shape.fill(paint(for: layer.role))
+                        } else if let fill = layer.fill {
+                            shape.fill(fill)
+                        }
+                        shape
+                            .trim(from: 0, to: layer.trim)
+                            .stroke(paint(for: layer.role), style: strokeStyle(for: layer.role))
                     }
-                    shape
-                        .trim(from: 0, to: layer.trim)
-                        .stroke(paint(for: layer.role), style: strokeStyle(for: layer.role))
+                    .scaleEffect(layer.scale)
+                    .offset(x: layer.offsetX)
+                    .opacity(layer.isVisible ? layer.role.opacity : 0)
+                    .blendMode(layer.role.blendMode)
                 }
-                .scaleEffect(layer.scale)
-                .offset(x: layer.offsetX)
-                .opacity(layer.isVisible ? layer.role.opacity : 0)
-                .blendMode(layer.role.blendMode)
             }
         }
     }
