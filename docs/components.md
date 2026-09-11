@@ -133,6 +133,11 @@ Each box is drawn from its own seed, offset from the track's. Sharing one seed
 would draw the same rectangle seven times over, which reads as a printed rule
 rather than as a hand.
 
+A box is 34 points wide at most, not exactly. Boxes share the width the row has
+and shrink when there are more of them than fit, so a track of twelve steps on a
+phone stays inside the screen instead of pushing what is beside it off the edge.
+A track with room to spare looks exactly as it did.
+
 `DrawablyProgressViewStyle` puts the same drawing on any SwiftUI `ProgressView`:
 
 ```swift

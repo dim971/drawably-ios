@@ -101,10 +101,14 @@ public struct DrawablyProgressViewStyle: ProgressViewStyle {
 
         private func segment(isDone: Bool, offset: UInt32) -> some View {
             Color.clear
-                .frame(
-                    width: DrawablyGeometry.progressSegmentWidth,
-                    height: DrawablyGeometry.progressSegmentHeight
-                )
+                .frame(height: DrawablyGeometry.progressSegmentHeight)
+                // A cap, not a width. A track of twelve boxes at a fixed 34
+                // points is wider than a phone, and the row it sits in was
+                // pushing its neighbours off the screen rather than wrapping.
+                // Boxes now share whatever the row has and never grow past the
+                // size they were drawn at, so a short track looks exactly as it
+                // did and a long one still fits.
+                .frame(maxWidth: DrawablyGeometry.progressSegmentWidth)
                 .drawablySketch(
                     "progress",
                     layers: [

@@ -253,6 +253,14 @@ import SwiftUI
                 }
             },
             Demo(
+                "A long track",
+                note: "Boxes share the row rather than each keeping 34 points, "
+                    + "so twelve steps still fit on a phone.",
+                code: "DrawablyProgress(step: 5, of: 12)"
+            ) {
+                DrawablyProgress(step: 5, of: 12)
+            },
+            Demo(
                 "On a ProgressView",
                 note: "The style dresses any counted ProgressView, so the "
                     + "platform still reads it out as progress.",
